@@ -1,10 +1,13 @@
 class StopWatch {
   #startTime;
   #intervalId;
+  value;
+  ms;
   start(callback, timeLimit, timeoutfn) {
     this.#startTime = new Date().getTime();
     this.#intervalId = setInterval(() => {
       const ms = new Date().getTime() - this.#startTime;
+      this.ms = ms;
       if (ms >= timeLimit) {
         this.stop();
         callback(this.#formatTime(timeLimit - 1));

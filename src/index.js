@@ -36,6 +36,9 @@ const createWindow = () => {
   ipcMain.on("close", () => {
     app.quit();
   });
+  ipcMain.on("minimize", () => {
+    mainWindow.minimize();
+  });
   remoteMain.enable(mainWindow.webContents);
 };
 
@@ -43,15 +46,12 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
+app // explicitly with Cmd + Q. // for applications and their menu bar to stay active until the user quits // Quit when all windows are closed, except on macOS. There, it's common
+  .on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
+  });
 
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the

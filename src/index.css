@@ -40,9 +40,8 @@ body {
   @apply h-9 rounded-xl bg-[#4EFF8A] w-[376px] hover:opacity-90 shadow-black shadow-sm;
 }
 .videoInfo {
-  @apply w-fit h-full text-white flex flex-col justify-between
-  items-center box-border p-1 border border-black
-  border-dashed rounded-md bg-gray-600;
+  @apply w-fit h-full text-black flex flex-col justify-start
+  items-center box-border p-1 rounded-md gap-3;
 }
 .exportBtn {
   @apply min-w-fit h-7 bg-[#550000] text-white rounded-xl w-20

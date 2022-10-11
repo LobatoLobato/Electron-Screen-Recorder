@@ -9,7 +9,10 @@ const appCloseBtn = document.getElementById("appCloseBtn");
 appCloseBtn.onclick = () => {
   ipcRenderer.send("close");
 };
-
+const appMinimizeBtn = document.getElementById("appMinimizeBtn");
+appMinimizeBtn.onclick = () => {
+  ipcRenderer.send("minimize");
+};
 const errorBox = {
   element: document.getElementById("errorBox"),
   button: document.getElementById("errorBox").querySelector("button"),
@@ -25,6 +28,8 @@ errorBox.button.onclick = () => errorBox.hide();
 
 const videoInfo = {
   elapsedTime: document.getElementById("elapsedTime"),
+  editBtn: document.getElementById("editBtn"),
+  format: document.getElementById("videoFormat"),
   exportBtn: document.getElementById("exportBtn"),
 };
 const videoElement = document.querySelector("video");
@@ -72,7 +77,7 @@ function startRecording() {
 }
 function stopRecording() {
   if (!mediaRecorder || mediaRecorder.state === "inactive") {
-    errorBox.show("No recording active");
+    errorBox.show("No active recording");
     return;
   }
   errorBox.hide();
@@ -133,12 +138,31 @@ async function selectSource(source) {
 }
 
 const { dialog } = remote;
-const { writeFile } = require("fs");
+const { writeFile, rm, mkdir } = require("fs");
+const ffmpeg = require("./ffmpeg");
+
 async function handleDataAvailable(e) {
   console.log("video data available");
 
   const blob = new Blob([e.data], { type: "video/webm; codecs=h264" });
   const buffer = Buffer.from(await blob.arrayBuffer());
+
+  // videoInfo.editBtn.onclick = () => {
+  //   const tempFolder = `${process.cwd()}\\temp`;
+  //   const tempFilePath = `${tempFolder}\\temp.webm`;
+  //   const outputFilePath = `${tempFolder}\\out.webm`;
+  //   console.log(tempFolder);
+  //   mkdir(tempFolder, () => {
+  //     writeFile(tempFilePath, buffer, () => {
+  //       const process = ffmpeg().input(tempFilePath);
+
+  //       process.setStartTime(stopWatch.ms / 2000);
+
+  //       process.save(outputFilePath);
+  //       console.log("Editing file");
+  //     });
+  //   });
+  // };
 
   videoInfo.exportBtn.style.opacity = 1;
   videoInfo.exportBtn.style.cursor = "pointer";
@@ -146,13 +170,26 @@ async function handleDataAvailable(e) {
   videoInfo.exportBtn.onclick = async () => {
     const { filePath } = await dialog.showSaveDialog({
       buttonLabel: "Save video",
-      defaultPath: `vid-${Date.now()}.webm`,
+      defaultPath: `teste.${videoInfo.format.value}`, //`vid-${Date.now()}.webm`,
     });
     console.log(filePath);
+
     if (filePath) {
-      writeFile(filePath, buffer, () =>
-        console.log("video saved successfully!")
-      );
+      const inputPath = filePath.replace(videoInfo.format.value, "webm");
+      const outputPath = filePath;
+      writeFile(inputPath, buffer, async () => {
+        if (videoInfo.format.value === "webm") {
+          return;
+        }
+        ffmpeg()
+          .input(inputPath)
+          .save(outputPath)
+          .on("end", () => {
+            rm(inputPath, () => {
+              console.log("video saved successfully!");
+            });
+          });
+      });
     }
   };
 }

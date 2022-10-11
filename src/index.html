@@ -18,24 +18,43 @@
         <button class="cursor-pointer z-50">
           <i class="fa-solid fa-bars menuIcon"></i>
         </button>
-        <button>
+        <!-- <button>
           <i class="fa-solid fa-sun text-gray-800 text-xl pt-1 ml-3"></i>
-        </button>
+        </button> -->
         <h1 class="w-full text-center h-full pt-1 draggableArea">
           Electron Screen Recorder
         </h1>
-        <button class="cursor-pointer z-50" id="appCloseBtn">
-          <i class="fa-solid fa-circle-xmark text-red-500 text-xl p-2"></i>
-        </button>
+        <div class="flex">
+          <button class="cursor-pointer z-50" id="appMinimizeBtn">
+            <i
+              class="fa-solid fa-window-minimize text-yellow-500 text-xl p-2"
+            ></i>
+          </button>
+          <button class="cursor-pointer z-50" id="appCloseBtn">
+            <i class="fa-solid fa-circle-xmark text-red-500 text-xl p-2"></i>
+          </button>
+        </div>
       </nav>
+
       <div class="flex w-full">
         <div class="w-[100px] h-full flex items-center justify-center">
           <div class="videoInfo">
             <div
-              class="text-center text-white text-xs whitespace-nowrap border border-white border-dashed px-1"
+              class="text-center text-black text-xs whitespace-nowrap border border-black border-dashed px-1"
             >
               <p>Elapsed Time</p>
               <p id="elapsedTime">00:00:00:000</p>
+            </div>
+            <button class="exportBtn" id="editBtn">Edit</button>
+            <div
+              class="flex text-center items-center text-xs border border-black border-dashed"
+            >
+              <label for="videoFormat">Format:</label>
+              <select name="videoFormat" id="videoFormat">
+                <option value="webm">webm</option>
+                <option value="mp4">mp4</option>
+                <option value="avi">avi</option>
+              </select>
             </div>
             <button class="exportBtn" id="exportBtn">Export</button>
           </div>
@@ -63,6 +82,7 @@
           <i class="fa-solid fa-circle-xmark"></i>
         </button>
       </div>
+      <button class="btn btn-primary" id="teste">aaaaaa</button>
     </div>
   </body>
 </html>
