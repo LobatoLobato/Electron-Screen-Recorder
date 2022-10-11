@@ -5,6 +5,11 @@ const desktopCapturer = {
     ipcRenderer.invoke("DESKTOP_CAPTURER_GET_SOURCES", opts),
 };
 
+const appCloseBtn = document.getElementById("appCloseBtn");
+appCloseBtn.onclick = () => {
+  ipcRenderer.send("close");
+};
+
 const errorBox = {
   element: document.getElementById("errorBox"),
   button: document.getElementById("errorBox").querySelector("button"),

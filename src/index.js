@@ -33,7 +33,9 @@ const createWindow = () => {
   ipcMain.handle("DESKTOP_CAPTURER_GET_SOURCES", (event, opts) =>
     desktopCapturer.getSources(opts)
   );
-
+  ipcMain.on("close", () => {
+    app.quit();
+  });
   remoteMain.enable(mainWindow.webContents);
 };
 
