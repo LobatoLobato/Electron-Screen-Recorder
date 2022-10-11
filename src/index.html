@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+
+    <link rel="stylesheet" href="../dist/index.css" />
+    <script
+      src="https://kit.fontawesome.com/c0fa4f2c35.js"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="StopWatch.js"></script>
+    <script defer src="render.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <nav class="navbar">
+        <button class="cursor-pointer z-50">
+          <i class="fa-solid fa-bars menuIcon"></i>
+        </button>
+        <button>
+          <i class="fa-solid fa-sun text-gray-800 text-xl pt-1 ml-3"></i>
+        </button>
+        <h1 class="w-full text-center h-full pt-1 draggableArea">
+          Electron Screen Recorder
+        </h1>
+        <button class="cursor-pointer z-50">
+          <i class="fa-solid fa-circle-xmark text-red-500 text-xl p-2"></i>
+        </button>
+      </nav>
+      <div class="flex w-full">
+        <div class="w-[100px] h-full flex items-center justify-center">
+          <div class="videoInfo">
+            <div
+              class="text-center text-white text-xs whitespace-nowrap border border-white border-dashed px-1"
+            >
+              <p>Elapsed Time</p>
+              <p id="elapsedTime">00:00:00:000</p>
+            </div>
+            <button class="exportBtn" id="exportBtn">Export</button>
+          </div>
+        </div>
+        <video class="videoPreview"></video>
+      </div>
+      <div class="controlBar">
+        <button id="startBtn" class="startBtn">Start</button>
+        <button id="stopBtn" class="stopBtn">Stop</button>
+
+        <button id="videoSelectBtn" class="sourceBtn">
+          Choose a video source
+        </button>
+      </div>
+      <hr />
+      <div
+        class="flex flex-col items-center bg-[#ffed4e] w-[600px] rounded-md shadow-black shadow-inner mb-2"
+      >
+        <p class="text-center w-full bg-[#5C16A3] rounded-t-md">Source</p>
+        <p id="videoSourceName" class="text-center"></p>
+      </div>
+      <div id="errorBox" class="errorBox">
+        <p></p>
+        <button>
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  font-family: "JetBrains Mono", monospace;
+  overflow: hidden;
+  background-color: transparent;
+
+  position: absolute;
+}
+
+.app {
+  @apply relative w-[800px] h-[600px] bg-white rounded-lg flex flex-col items-center gap-2;
+}
+.navbar {
+  @apply relative rounded-t-lg w-[800px] h-8 left-0 top-0 bg-[#5c16a3]
+  flex justify-between items-center select-none;
+}
+.draggableArea {
+  @apply w-full h-full;
+  -webkit-app-region: drag;
+}
+.menuIcon {
+  @apply p-2 text-[#ffed4e] text-xl box-border z-50;
+}
+
+.startBtn {
+  @apply min-w-fit h-9 bg-[#ffed4e] rounded-xl w-24 hover:opacity-90 px-1 shadow-black shadow-sm;
+}
+
+.stopBtn {
+  @apply min-w-fit h-9 bg-[#5C16A3] rounded-xl w-24 hover:opacity-90 shadow-black shadow-sm;
+}
+
+.sourceBtn {
+  @apply h-9 rounded-xl bg-[#4EFF8A] w-[376px] hover:opacity-90 shadow-black shadow-sm;
+}
+.videoInfo {
+  @apply w-fit h-full text-white flex flex-col justify-between
+  items-center box-border p-1 border border-black
+  border-dashed rounded-md bg-gray-600;
+}
+.exportBtn {
+  @apply min-w-fit h-7 bg-[#550000] text-white rounded-xl w-20
+  shadow-black shadow-sm opacity-70 cursor-default;
+}
+.videoPreview {
+  @apply self-center w-[600px] h-[337.5px] bg-gray-100;
+}
+
+.controlBar {
+  @apply flex justify-between w-[600px];
+}
+
+.errorBox {
+  @apply hidden text-base font-bold text-red-600 text-center w-fit px-2
+  border-2 border-red-600 bg-red-200 gap-2;
+}
