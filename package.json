@@ -14,9 +14,9 @@
     }
   },
   "scripts": {
-    "dev": "npm-watch restart-electron-app",
-    "restart-electron-app": "electron-forge start",
+    "dev": "npm start && npm run start-tailwind",
     "start": "electron-forge start",
+    "start-tailwind": "npx tailwindcss -i ./src/index.css -o ./dist/index.css --watch",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
